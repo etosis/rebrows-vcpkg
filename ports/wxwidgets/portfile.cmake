@@ -44,6 +44,11 @@ else()
     list(APPEND OPTIONS -DwxUSE_WEBREQUEST_CURL=ON)
 endif()
 
+# Edge webview must be static if linked statically, or the dll should be supplied
+if(VCPKG_LIBRARY_LINKAGE STREQUAL "static" AND wxUSE_WEBVIEW_EDGE)
+    list(APPEND OPTIONS -DwxUSE_WEBVIEW_EDGE_STATIC=ON)
+endif()
+
 vcpkg_find_acquire_program(PKGCONFIG)
 
 # This may be set to ON by users in a custom triplet.
